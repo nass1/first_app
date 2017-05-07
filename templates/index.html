@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<html>
+    <title>First App</title>
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" />
+
+</html>
+
+<body>
+    <h1>This is Dates is trouble</h1>
+    <h2>This is Dates is trouble</h2>
+
+  <div class="djangotwo">
+      {% if access_recored %}
+      <table>
+          <thead>
+          	<th>Site Name</th>
+              <th>Date Accessed</th>
+          </thead>
+
+          {% for i in access_recored%}
+          <tr>
+              <td>{{ i.name }}</td>
+              <td>{{ i.date}}</td>
+          </tr>
+
+          {% endfor %}
+
+      </table>
+		{% else %}
+ 			<p>No Access Recored</p>
+
+      {% endif %}
+
+
+
+    </div>
+
+
+</body>
