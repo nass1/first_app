@@ -10,5 +10,7 @@ urlpatterns = [
     url(r'^real/$', views.real, name="real"),
     url(r'^other/$', views.other, name="other"),
 
+    url(r'^reg/$', views.regi, name="regi"),
+
 
 ]

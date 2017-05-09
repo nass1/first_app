@@ -23,8 +23,11 @@ def form_name(request):
 ####################################################################
 
 def index1(request):
+    context_dict = {'text':'hello world',
+                    'number': 100
 
-    return render(request,'basic_app/index1.html')
+    }
+    return render(request,'basic_app/index1.html', context_dict)
 
 
 def other(request):

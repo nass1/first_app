@@ -3,4 +3,7 @@
 {% block body_block %}
 <h1>Welcome to Index 1 (one)</h1>
 <h2> example of template Index inhertance</h2>
+<h1>{{ text|upper|add:" 10" }}</h1>
+<h1>{{ number|add:'99' }}</h1>
+<h1>{{ text|cut:"world" }}</h1>
 {% endblock %}
