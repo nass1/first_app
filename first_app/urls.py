@@ -12,5 +12,7 @@ urlpatterns = [
 
     url(r'^regi/$', views.regi, name="regi"),
 
+    url(r'^user_login/$', views.user_login, name="user_login"),
+
 
 ]

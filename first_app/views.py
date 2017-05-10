@@ -1,8 +1,91 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from first_app.models import AccessRecord, Topic, Webpage
 from . forms import UserForm, UserProfileForm
-#############################################
+
+
+##################################################### start of log in Log out
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+
+
+@login_required
+def user_logout(request):
+    # Log out the user.
+    logout(request)
+    # Return to homepage.
+    return HttpResponseRedirect(reverse('index2'))
+
+
+
+@login_required
+def special(request):
+    # Remember to also set login url in settings.py!
+    # LOGIN_URL = '/basic_app/user_login/'
+    return HttpResponse("You are logged in. Nice!")
+
+
+
+def user_login(request):
+    print ("test 123")
+    print (request.POST.get('username'))
+    print (request.POST.get('password'))
+
+    if request.method == 'POST':
+        # First get the username and password supplied
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Django's built-in authentication function:
+        user = authenticate(username=username, password=password)
+
+        # If we have a user
+        if user:
+            #Check it the account is active
+            if user.is_active:
+                # Log the user in.
+                print ("after this we check if user active")
+                login(request,user)
+                # Send the user back to some page.
+                # In this case their homepage.
+                print ("index2 if")
+                return HttpResponseRedirect(reverse('index2'))
+            else:
+                # If account is not active:
+                print ("index2 else")
+                return HttpResponse("Your account is not active.")
+        else:
+            print("Someone tried to login and failed.")
+            print("They used username: {} and password: {}".format(username,password))
+            return HttpResponse("Invalid login details supplied.")
+
+    else:
+        #Nothing has been provided for username or password.
+        print ("last else")
+        return render(request, 'basic_app2/login.html', {})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################################# start of log in Log out
 def index2(request):
 
     return render(request, 'basic_app2/index2.html')

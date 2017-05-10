@@ -11,6 +11,16 @@
                     <li><a class="navbar-brand" href="{% url 'index2' %}">HOME</a></li>
                     <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
                     <li><a class="navbar-link" href="{% url 'first_app:regi' %}">Register</a></li>
+
+                    {% if user.is_authenticated %}
+
+                    <li><a class="navbar-link" href="{% url 'logout' %}">LogOut</a></li>
+                    <li><a class="navbar-link">Welcome// {{request.user}}</a></li>
+					{% else %}
+                    <li><a class="navbar-link" href="{% url 'first_app:user_login' %}">LogIn</a></li>
+
+                    {% endif %}
+
                 </ul>
             </div>
         </nav>
